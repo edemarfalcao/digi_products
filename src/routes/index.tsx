@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import FullPageLoading from "../components/FullPageLoading";
-import NotFound from "../components/NotFound";
+import FullPageLoading from "~/components/FullPageLoading";
+import NotFound from "~/components/NotFound";
 import { mapRoutes } from "./mapRoutes";
 import { routeComponents } from "./routeComponents";
 

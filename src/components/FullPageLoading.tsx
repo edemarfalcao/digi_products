@@ -1,3 +1,5 @@
+import React from "react";
+
 const FullPageLoading: React.FC = () => {
     return (
         <div className="flex items-center justify-center h-screen">
