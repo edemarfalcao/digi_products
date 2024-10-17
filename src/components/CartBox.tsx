@@ -39,7 +39,7 @@ const CartBox: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                     <div className="flex items-baseline">
                                         <button
                                             onClick={() => decreaseQuantity(item.product.id)}
-                                            className="px-2 py-1 bg-gray-300 rounded"
+                                            className="px-2 py-1 rounded"
                                             aria-label="Remover unidade"
                                         >
                                             <FontAwesomeIcon icon={faMinus} width={8} height={8} />
@@ -47,7 +47,7 @@ const CartBox: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                                         <span className="mx-2">{item.quantity}</span>
                                         <button
                                             onClick={() => increaseQuantity(item.product.id)}
-                                            className="px-2 py-1 bg-gray-300 rounded"
+                                            className="px-2 py-1 rounded"
                                             aria-label="Adicionar unidade"
                                         >
                                             <FontAwesomeIcon icon={faPlus} width={8} height={8} />

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index }) => {
-    const { addToCart } = useCart();
+    const { addToCart, cart } = useCart();
 
     if (!product) return (
         <div
@@ -29,6 +29,8 @@ const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index 
             </div>
         </div>
     )
+
+    const quantity = cart.find((item) => item.product.id === product.id)?.quantity;
 
     return (
         <div
@@ -73,10 +75,15 @@ const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index 
                 </p>
 
                 <div className="flex items-center justify-end gap-2">
-                    <button className={`mt-4 ${product.hero ? 'w-full sm:w-64' : 'w-full'} rounded bg-pink-600 py-2 text-white hover:bg-pink-700`} onClick={() => addToCart(product)}>
+                    <button className={`mt-4 ${product.hero ? 'w-full sm:w-64' : 'w-full'} rounded bg-pink-600 py-2 px-2   text-white hover:bg-pink-700`} onClick={() => addToCart(product)}>
                         Adicionar ao carrinho
                     </button>
                 </div>
+                {quantity &&
+                    <div className="text-right">
+                        <span className="ml-2 text-sm font-medium text-gray-500 dark:text-white">No carrinho: {quantity}</span>
+                    </div>
+                }
             </div>
         </div>)
 
