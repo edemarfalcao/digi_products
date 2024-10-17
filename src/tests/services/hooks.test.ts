@@ -11,7 +11,7 @@ describe("useGetProducts", () => {
     });
 
     it("should set loading to true and fetch data successfully", async () => {
-        const mockProducts = [{ name: "Product 1" }, { name: "Product 2" }];
+        const mockProducts = [{ id: "0", name: "Product 1" }, {id: "1", name: "Product 2" }];
 
         (fetch as Mock).mockResolvedValueOnce({
             ok: true,

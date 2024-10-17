@@ -1,4 +1,5 @@
 import React from "react";
+import { useCart } from "~/hooks/useCart";
 import { Product } from "~/interfaces/Product";
 import { formatCurrency } from "~/utils/formatters";
 
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index }) => {
+    const { addToCart } = useCart();
+
     if (!product) return (
         <div
             key={`product-${index}-loading`}
@@ -27,34 +30,41 @@ const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index 
         </div>
     )
 
-
     return (
         <div
             key={`product-${index}`}
-            className={`rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800
+            className={`rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 p-2 sm:p-6
             ${product.hero ? "sm:col-span-2 lg:col-span-3 xl:col-span-4" : ""}`}
+
         >
-            <div className="h-56 w-full">
-                <a href="#">
-                    <img
-                        className="mx-auto h-full dark"
-                        src={product.image}
-                        alt={product.name}
-                    />
-                </a>
+            <div className="w-full">
+                <img
+                    className="mx-auto h-full dark"
+                    src={product.image}
+                    alt={product.name}
+                />
             </div>
-            <div className="pt-6">
-                <div className="mb-4 flex items-center justify-between gap-4">
-                    <span className="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                        {product.offer || '‎'}
-                    </span>
+            {product.hero &&
+                <div>
+                    <p className="text-pink-800 text-pink-600 text-xl bold font-large mt-2">
+                        {product.hero}
+                    </p>
                 </div>
-                <a
-                    href="#"
+            }
+            <div className="pt-2 sm:pt-6">
+                <div className="mb-4 flex items-center justify-between gap-4">
+                    {product.offer ?
+                        <span className="me-2 rounded bg-primary-100 py-0.5 text-sm font-medium text-pink-800 dark:bg-primary-200 italic text-pink-200">
+                            {product.offer}
+                        </span> :
+                        <div className="py-3"></div>
+                    }
+                </div>
+                <span
                     className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
                 >
                     {product.name}
-                </a>
+                </span>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                     {product.detail}
                 </p>
@@ -62,11 +72,11 @@ const ProductCard: React.FC<React.PropsWithChildren<Props>> = ({ product, index 
                     {formatCurrency(product.price)}
                 </p>
 
-                {/* <div className="flex items-center justify-end gap-2">
-                    <button className={`mt-4 ${product.hero ? 'w-64' : 'w-full'} rounded bg-pink-600 py-2 text-white hover:bg-pink-700`}>
+                <div className="flex items-center justify-end gap-2">
+                    <button className={`mt-4 ${product.hero ? 'w-full sm:w-64' : 'w-full'} rounded bg-pink-600 py-2 text-white hover:bg-pink-700`} onClick={() => addToCart(product)}>
                         Adicionar ao carrinho
                     </button>
-                </div> */}
+                </div>
             </div>
         </div>)
 

@@ -1,4 +1,4 @@
-export const formatCurrency = (price: string) => {
+export const formatCurrency = (price: string | number) => {
     const priceNumber = Number(price);
 
     if (isNaN(priceNumber)) return "NaN";

@@ -15,7 +15,11 @@ export const useGetProducts = () => {
                 return response.json();
             })
             .then((data) => {
-                setData(data);
+                const transformedData = data.map((item: Product, index: number) => ({
+                    ...item,
+                    id: index.toString(),
+                }));
+                setData(transformedData);
                 setLoading(false);
             })
             .catch(() => {
