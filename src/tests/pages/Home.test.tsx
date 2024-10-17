@@ -3,7 +3,7 @@ import { describe, expect, it, Mock, vi } from "vitest";
 import { Product } from "~/interfaces/Product";
 import Home from "~/pages/Home";
 import { useGetProducts } from "~/services/hooks/useGetProducts";
-import { renderWithCartProvider } from "../helper";
+import { renderWithProviders } from "../helper";
 
 vi.mock("~/components/Header", () => ({
     __esModule: true,
@@ -34,7 +34,7 @@ describe("Home Component", () => {
             error: false,
         });
 
-        renderWithCartProvider(<Home />);
+        renderWithProviders(<Home />);
         const loadingProducts = screen.getAllByText("Loading Product");
         expect(loadingProducts.length).toBe(8);
     });
@@ -47,7 +47,7 @@ describe("Home Component", () => {
             error: false,
         });
 
-        renderWithCartProvider(<Home />);
+        renderWithProviders(<Home />);
         expect(screen.getByText("Product 1")).toBeInTheDocument();
         expect(screen.getByText("Product 2")).toBeInTheDocument();
     });
@@ -59,7 +59,7 @@ describe("Home Component", () => {
             error: true,
         });
 
-        renderWithCartProvider(<Home />);
+        renderWithProviders(<Home />);
         expect(screen.getByText("Algo deu errado!")).toBeInTheDocument();
     });
 });

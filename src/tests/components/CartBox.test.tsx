@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { Mock } from 'vitest';
 import CartBox from '~/components/CartBox';
 import { useCart } from '~/hooks/useCart';
-import { renderWithCartProvider } from '../helper';
+import { renderWithProviders } from '../helper';
 
 
 vi.mock('~/hooks/useCart');
@@ -20,7 +20,7 @@ describe('CartBox', () => {
             removeFromCart: vi.fn(),
         });
 
-        renderWithCartProvider(<CartBox onClose={() => { }} />);
+        renderWithProviders(<CartBox onClose={() => { }} />);
         expect(screen.getByText(/você ainda não possui nenhum produto no carrinho/i)).toBeInTheDocument();
     });
 
@@ -35,7 +35,7 @@ describe('CartBox', () => {
             removeFromCart: mockRemoveFromCart,
         });
 
-        renderWithCartProvider(<CartBox onClose={() => { }} />);
+        renderWithProviders(<CartBox onClose={() => { }} />);
         const removeButton = screen.getByLabelText(/Deletar item/i);
         fireEvent.click(removeButton);
 
@@ -53,7 +53,7 @@ describe('CartBox', () => {
             increaseQuantity: mockIncreaseQuantity,
         });
 
-        renderWithCartProvider(<CartBox onClose={() => { }} />);
+        renderWithProviders(<CartBox onClose={() => { }} />);
         const increaseButton = screen.getByLabelText(/Adicionar unidade/i);
         fireEvent.click(increaseButton);
 
@@ -71,7 +71,7 @@ describe('CartBox', () => {
             decreaseQuantity: mockDecreaseQuantity,
         });
 
-        renderWithCartProvider(<CartBox onClose={() => { }} />);
+        renderWithProviders(<CartBox onClose={() => { }} />);
         const decreaseButton = screen.getByLabelText(/Remover unidade/i);
         fireEvent.click(decreaseButton);
 
@@ -80,7 +80,7 @@ describe('CartBox', () => {
 
     it('should close the cart when close button is clicked', () => {
         const onClose = vi.fn();
-        renderWithCartProvider(<CartBox onClose={onClose} />);
+        renderWithProviders(<CartBox onClose={onClose} />);
 
         const closeButton = screen.getByLabelText(/Fechar carrinho/i);
         fireEvent.click(closeButton);

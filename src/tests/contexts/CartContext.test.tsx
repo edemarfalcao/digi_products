@@ -3,7 +3,7 @@ import React from 'react';
 import { CartContext } from '~/contexts/CartContext';
 import { Product } from '~/interfaces/Product';
 
-import { renderWithCartProvider } from '../helper';
+import { renderWithProviders } from '../helper';
 
 const sampleProduct: Product = {
     id: Math.random().toString(),
@@ -32,7 +32,7 @@ const TestComponent: React.FC = () => {
 
 describe('CartProvider', () => {
     it('should add a product to the cart', async () => {
-        renderWithCartProvider(<TestComponent />);
+        renderWithProviders(<TestComponent />);
 
         expect(screen.getByTestId('total-quantity').textContent).toBe('0');
 
@@ -44,7 +44,7 @@ describe('CartProvider', () => {
     });
 
     it('should increase the quantity of a product in the cart', async () => {
-        renderWithCartProvider(<TestComponent />);
+        renderWithProviders(<TestComponent />);
 
         await act(() => {
             screen.getByText('Add to cart').click();
@@ -62,7 +62,7 @@ describe('CartProvider', () => {
     });
 
     it('should decrease the quantity of a product in the cart', async () => {
-        renderWithCartProvider(<TestComponent />);
+        renderWithProviders(<TestComponent />);
 
         await act(() => {
             screen.getByText('Add to cart').click();
@@ -80,7 +80,7 @@ describe('CartProvider', () => {
     });
 
     it('should remove a product from the cart', async () => {
-        renderWithCartProvider(<TestComponent />);
+        renderWithProviders(<TestComponent />);
 
         await act(() => {
             screen.getByText('Add to cart').click();
@@ -97,7 +97,7 @@ describe('CartProvider', () => {
     });
 
     it('should clear the cart', async () => {
-        renderWithCartProvider(<TestComponent />);
+        renderWithProviders(<TestComponent />);
 
         await act(() => {
             screen.getByText('Add to cart').click();

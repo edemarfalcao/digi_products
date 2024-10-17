@@ -1,10 +1,16 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { CartProvider } from '~/contexts/CartContext';
+import ToastProvider from '~/contexts/ToastProvider';
 
 
-const renderWithCartProvider = (ui: React.ReactNode) => {
-    return render(<CartProvider>{ui}</CartProvider>);
+const renderWithProviders = (ui: React.ReactNode) => {
+    return render(
+        <ToastProvider>
+            <CartProvider>
+                {ui}
+            </CartProvider>
+        </ToastProvider>);
 };
 
-export { renderWithCartProvider };
+export { renderWithProviders };
