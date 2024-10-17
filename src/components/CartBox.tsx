@@ -5,14 +5,14 @@ import { useCart } from '~/hooks/useCart';
 import { formatCurrency } from '~/utils/formatters';
 
 const CartBox: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+    const { cart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
 
     const total = cart.reduce((sum, item) => {
         return sum + Number(item.product.price) * item.quantity;
     }, 0);
 
     return (
-        <div className=" absolute right-4 z-50 mt-2 w-72 bg-white border rounded-md shadow-lg max-h-96 overflow-auto ">
+        <div className="absolute right-4 z-50 mt-2 w-72 bg-white border rounded-md shadow-lg max-h-96 overflow-auto ">
             <div className="p-4">
                 <h2 className="text-xl mb-4 font-semibold">Carrinho</h2>
                 <button className="absolute top-2 right-2" onClick={onClose} aria-label="Fechar carrinho">
@@ -60,11 +60,17 @@ const CartBox: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                         ))}
                     </ul>
                 )}
-                <div className="mt-4 flex justify-end ">
+                <button
+                    onClick={clearCart}
+                    className="text-gray-500 hover:text-gray-700 text-sm font-semibold rounded"
+                >
+                    Limpar carrinho
+                </button>
+                <div className="mt-4 flex justify-end">
                     <p className="text-lg font-medium text-gray-500">Total: {formatCurrency(total)}</p>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
