@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ApplicationRouter from '~/routes';
+import { renderWithProviders } from '../helper';
 
 describe('ApplicationRouter', () => {
     beforeEach(() => {
@@ -28,13 +29,13 @@ describe('ApplicationRouter', () => {
     });
 
     it('should render the correct component for a valid route', async () => {
-
-        render(
+        renderWithProviders(
             <MemoryRouter>
                 <ApplicationRouter />
             </MemoryRouter>
         );
 
-        await await screen.findByText(/home/i)
+
+        await await screen.findByText(/Digi/i)
     });
 });

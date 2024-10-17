@@ -28,7 +28,15 @@ Using npm:
 npm install
 ```
 
-### 4. Start the Development Server
+### 4. Create a .env file
+
+Create a .env file in the root directory of the project and add the following content:
+
+```
+VITE_JSON_URL="/products.json to use the json file from the public folder or a url to fetch a json file"
+```
+
+### 5. Start the Development Server
 
 To run the project in development mode:
 
