@@ -35,6 +35,6 @@ describe('ApplicationRouter', () => {
             </MemoryRouter>
         );
 
-        await await screen.findByText(/home/i)
+        await await screen.findByText(/Digi/i)
     });
 });
